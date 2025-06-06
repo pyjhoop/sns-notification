@@ -3,6 +3,10 @@ package com.study;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -10,8 +14,12 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootApplication
+@SpringBootTest
 class NotificationRepositoryMemoryImplTest {
-    private final NotificationRepositoryMemoryImpl sut = new NotificationRepositoryMemoryImpl();
+
+    @Autowired
+    private NotificationRepository sut;
 
     Notification notification;
     @BeforeEach
