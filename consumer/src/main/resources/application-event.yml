@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    function:
+      definition: comment; like; follow;
+    stream:
+      binder:
+        brokers: localhost:9092
+      bindings:
+        comment-in-0: # 함수이름 받으면 in/out 숫자 커멘트 펄션에 입력 채널 0번을 사용할거다.
+          destination: comment # 토픽 명
+          content-type: application/json
+          group: notification-consumer
+          consumer:
+            max-attempts: 2 # 두번 실패하면 데드 큐로 가거나 삭제됨 설정 필요
+        like-in-0:
+          destination: like # 토픽 명
+          content-type: application/json
+          group: notification-consumer
+          consumer:
+            max-attempts: 2 # 두번 실패하면 데드 큐로 가거나 삭제됨 설정 필요
+        follow-in-0:
+          destination: follow # 토픽 명
+          content-type: application/json
+          group: notification-consumer
+          consumer:
+            max-attempts: 2 # 두번 실패하면 데드 큐로 가거나 삭제됨 설정 필요
+            # 따로 옵션을 안주면 자동으로 생성된다. 자동생성은 끄는게 좋다.
